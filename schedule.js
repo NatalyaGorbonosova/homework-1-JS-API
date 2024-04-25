@@ -46,7 +46,11 @@ const contentEl = document.querySelector('.content');
 const schedule = getLsSchedule();
 
 schedule.forEach(lesson => {
-    contentEl.insertAdjacentHTML("beforeend", getLessonHTML(lesson))
+    if (lesson.currentParticipants === lesson.maxParticipants) {
+        contentEl.insertAdjacentHTML("beforeend", getLessonFullHTML(lesson));
+    } else {
+        contentEl.insertAdjacentHTML("beforeend", getLessonHTML(lesson))
+    }
 });
 
 contentEl.addEventListener('click', ({target}) => {
@@ -118,6 +122,18 @@ function getLessonHTML(lesson) {
     <p class="max-participants">Максимальное количество участников: <span class="max">${lesson.maxParticipants}</span></p>
     <p class="current-participants">Текущее количество участников:<span class="number-part">${lesson.currentParticipants}</span></p>
     <button class="singUp-btn">Записаться</button>
+    <button class="cancel-btn" disabled="false">Отменить запись</button>
+    <br>
+</div>`;
+}
+
+function getLessonFullHTML(lesson) {
+    return `<div class="lesson" data-id="${lesson.id}">
+    <h3 class="name-lesson">${lesson.name}</h3>
+    <p class="time-lesson">Время проведения занятия: ${lesson.time}</p>
+    <p class="max-participants">Максимальное количество участников: <span class="max">${lesson.maxParticipants}</span></p>
+    <p class="current-participants">Текущее количество участников:<span class="number-part">${lesson.currentParticipants}</span></p>
+    <button class="singUp-btn" disabled="false">Записаться</button>
     <button class="cancel-btn" disabled="false">Отменить запись</button>
     <br>
 </div>`;
