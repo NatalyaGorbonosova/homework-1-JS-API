@@ -118,7 +118,7 @@ function getLessonHTML(lesson) {
     <p class="max-participants">Максимальное количество участников: <span class="max">${lesson.maxParticipants}</span></p>
     <p class="current-participants">Текущее количество участников:<span class="number-part">${lesson.currentParticipants}</span></p>
     <button class="singUp-btn">Записаться</button>
-    <button class="cancel-btn">Отменить запись</button>
+    <button class="cancel-btn" disabled="false">Отменить запись</button>
     <br>
 </div>`;
 }
